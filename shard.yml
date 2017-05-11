@@ -1,0 +1,10 @@
+name: asound
+version: 0.1.0
+
+authors:
+  - TamasSzekeres <szektam2@gmail.com>
+
+description: |
+  ALSA - libasound bindings for Crystal language.
+
+license: MIT
