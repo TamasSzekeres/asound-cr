@@ -1,6 +1,6 @@
 # asound-cr
 
-ALSA - libasound bindings for Crystal language.
+ALSA/libasound bindings for sound programming in Crystal language.
 
 ## Installation
 
