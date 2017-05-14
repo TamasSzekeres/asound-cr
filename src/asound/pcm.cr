@@ -656,8 +656,6 @@ module ALSA
 
     fun snd_pcm_hw_params_sizeof() : LibC::SizeT
 
-    # allocate an invalid #snd_pcm_hw_params_t using standard alloca
-    # ptr returned pointer
     fun snd_pcm_hw_params_malloc(ptr : SndPcmHwParamsT*) : Int32
     fun snd_pcm_hw_params_free(obj : SndPcmHwParamsT) : Void
     fun snd_pcm_hw_params_copy(dst : SndPcmHwParamsT, src : SndPcmHwParamsT) : Void
@@ -692,11 +690,11 @@ module ALSA
     fun snd_pcm_hw_params_set_subformat_mask(pcm : SndPcmT, params : SndPcmHwParamsT, mask : SndPcmSubformatMaskT) : Int32
     fun snd_pcm_hw_params_get_subformat_mask(params : SndPcmHwParamsT, mask : SndPcmSubformatMaskT) : Void
 
-    fun snd_pcm_hw_params_get_channels(params : SndPcmHwParamsT, val : UInt32) : Int32
+    fun snd_pcm_hw_params_get_channels(params : SndPcmHwParamsT, val : UInt32*) : Int32
     fun snd_pcm_hw_params_get_channels_min(params : SndPcmHwParamsT, val : UInt32*) : Int32
     fun snd_pcm_hw_params_get_channels_max(params : SndPcmHwParamsT, val : UInt32*) : Int32
     fun snd_pcm_hw_params_test_channels(pcm : SndPcmT, params : SndPcmHwParamsT, val : UInt32*) : Int32
-    fun snd_pcm_hw_params_set_channels(pcm : SndPcmT, params : SndPcmHwParamsT, val : UInt32*) : Int32
+    fun snd_pcm_hw_params_set_channels(pcm : SndPcmT, params : SndPcmHwParamsT, val : UInt32) : Int32
     fun snd_pcm_hw_params_set_channels_min(pcm : SndPcmT, params : SndPcmHwParamsT, val : UInt32*) : Int32
     fun snd_pcm_hw_params_set_channels_max(pcm : SndPcmT, params : SndPcmHwParamsT, val : UInt32*) : Int32
     fun snd_pcm_hw_params_set_channels_minmax(pcm : SndPcmT, params : SndPcmHwParamsT, min : UInt32*, max : UInt32*) : Int32
@@ -1078,5 +1076,10 @@ module ALSA
   @[AlwaysInline]
   def self.snd_pcm_abort(pcm : SndPcmT) : Int32
     ASound.snd_pcm_nonblock(pcm, 2)
+  end
+
+  @[AlwaysInline]
+  def self.snd_pcm_hw_params_alloca : ASound::SndPcmHwParamsT
+    LibC.malloc(ASound.snd_pcm_hw_params_sizeof).as(ASound::SndPcmHwParamsT)
   end
 end
