@@ -2,6 +2,10 @@
 
 ALSA/libasound bindings for sound programming in Crystal language.
 
+[![Build Status](https://travis-ci.org/TamasSzekeres/asound-cr.svg?branch=master)](https://travis-ci.org/TamasSzekeres/asound-cr)
+
+---
+
 ## Installation
 
 Add this to your application's `shard.yml`:
