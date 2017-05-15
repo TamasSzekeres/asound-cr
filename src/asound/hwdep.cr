@@ -41,5 +41,93 @@ module ALSA
 
       SND_HWDEP_IFACE_LAST = SND_HWDEP_IFACE_FW_TASCAM # last known hwdep interface
     end
+
+    # open for reading
+    SND_HWDEP_OPEN_READ = LibC::O_RDONLY
+    # open for writing
+    SND_HWDEP_OPEN_WRITE  = LibC::O_WRONLY
+    # open for reading and writing
+    SND_HWDEP_OPEN_DUPLEX = LibC::O_RDWR
+    # open mode flag: open in nonblock mode
+    SND_HWDEP_OPEN_NONBLOCK = LibC::O_NONBLOCK
+
+    # HwDep handle type
+    enum SndHwdepTypeT
+      # Kernel level HwDep
+      SND_HWDEP_TYPE_HW
+      # Shared memory client HwDep (not yet implemented)
+      SND_HWDEP_TYPE_SHM
+      # INET client HwDep (not yet implemented)
+      SND_HWDEP_TYPE_INET
+    end
+
+    # HwDep handle
+    alias SndHwdepT = Void*
+
+    fun snd_hwdep_open(hwdep : SndHwdepT*, name : UInt8*, mode : Int32) : Int32
+    fun snd_hwdep_close(hwdep : SndHwdepT*) : Int32
+    fun snd_hwdep_poll_descriptors(hwdep : SndHwdepT*, pfds : Pollfd*, space : UInt32) : Int32
+    fun snd_hwdep_poll_descriptors_count(hwdep : SndHwdepT*) : Int32
+    fun snd_hwdep_poll_descriptors_revents(hwdep : SndHwdepT*, pfds : Pollfd*, nfds : UInt32, revents : UInt16*) : Int32
+    fun snd_hwdep_nonblock(hwdep : SndHwdepT*, nonblock : Int32) : Int32
+    fun snd_hwdep_info(hwdep : SndHwdepT*, info : SndHwdepInfoT) : Int32
+    fun snd_hwdep_dsp_status(hwdep : SndHwdepT*, status : SndHwdepDspStatusT) : Int32
+    fun snd_hwdep_dsp_load(hwdep : SndHwdepT*, block : SndHwdepDspImageT) : Int32
+    fun snd_hwdep_ioctl(hwdep : SndHwdepT*, request : UInt32, arg : Void*) : Int32
+    fun snd_hwdep_write(hwdep : SndHwdepT*, buffer : Void*, size : LibC::SizeT) : LibC::SSizeT
+    fun snd_hwdep_read(hwdep : SndHwdepT*, buffer : Void*, size : LibC::SizeT) : LibC::SSizeT
+
+    fun snd_hwdep_info_sizeof() : LibC::SizeT
+    fun snd_hwdep_info_malloc(ptr : SndHwdepInfoT*) : Int32
+    fun snd_hwdep_info_free(obj : SndHwdepInfoT) : Void
+    fun snd_hwdep_info_copy(dst : SndHwdepInfoT, src : SndHwdepInfoT) : Void
+
+    fun snd_hwdep_info_get_device(obj : SndHwdepInfoT) : UInt32
+    fun snd_hwdep_info_get_card(obj : SndHwdepInfoT) : Int32
+    fun snd_hwdep_info_get_id(obj : SndHwdepInfoT) : UInt8*
+    fun snd_hwdep_info_get_name(obj : SndHwdepInfoT) : UInt8*
+    fun snd_hwdep_info_get_iface(obj : SndHwdepInfoT) : SndHwdepIfaceT
+    fun snd_hwdep_info_set_device(obj : SndHwdepInfoT, val : UInt32) : Void
+
+    fun snd_hwdep_dsp_status_sizeof() : LibC::SizeT
+    fun snd_hwdep_dsp_status_malloc(ptr : SndHwdepDspStatusT*) : Int32
+    fun snd_hwdep_dsp_status_free(obj : SndHwdepDspStatusT) : Void
+    fun snd_hwdep_dsp_status_copy(dst : SndHwdepDspStatusT, src : SndHwdepDspStatusT) : Void
+
+    fun snd_hwdep_dsp_status_get_version(obj : SndHwdepDspStatusT) : UInt32
+    fun snd_hwdep_dsp_status_get_id(obj : SndHwdepDspStatusT) : UInt8*
+    fun snd_hwdep_dsp_status_get_num_dsps(obj : SndHwdepDspStatusT) : UInt32
+    fun snd_hwdep_dsp_status_get_dsp_loaded(obj : SndHwdepDspStatusT) : UInt32
+    fun snd_hwdep_dsp_status_get_chip_ready(obj : SndHwdepDspStatusT) : UInt32
+
+    fun snd_hwdep_dsp_image_sizeof() : LibC::SizeT
+    fun snd_hwdep_dsp_image_malloc(ptr : SndHwdepDspImageT*) : Int32
+    fun snd_hwdep_dsp_image_free(obj : SndHwdepDspImageT) : Void
+    fun snd_hwdep_dsp_image_copy(dst : SndHwdepDspImageT, src : SndHwdepDspImageT) : Void
+
+    fun snd_hwdep_dsp_image_get_index(obj : SndHwdepDspImageT) : UInt32
+    fun snd_hwdep_dsp_image_get_name(obj : SndHwdepDspImageT) : UInt8*
+    fun snd_hwdep_dsp_image_get_image(obj : SndHwdepDspImageT) : Void*
+    fun snd_hwdep_dsp_image_get_length(obj : SndHwdepDspImageT) : LibC::SizeT
+
+    fun snd_hwdep_dsp_image_set_index(obj : SndHwdepDspImageT, index : UInt32) : Void
+    fun snd_hwdep_dsp_image_set_name(obj : SndHwdepDspImageT, name : UInt8*) : Void
+    fun snd_hwdep_dsp_image_set_image(obj : SndHwdepDspImageT, buffer : Void*) : Void
+    fun snd_hwdep_dsp_image_set_length(obj : SndHwdepDspImageT, length : LibC::SizeT) : Void
+  end
+
+  @[AlwaysInline]
+  def self.snd_hwdep_info_alloca : ASound::SndHwdepInfoT
+    LibC.malloc(ASound.snd_hwdep_info_sizeof).as(ASound::SndHwdepInfoT)
+  end
+
+  @[AlwaysInline]
+  def self.snd_hwdep_dsp_status_alloca : ASound::SndHwdepDspStatusT
+    LibC.malloc(ASound.snd_hwdep_dsp_status_sizeof).as(ASound::SndHwdepDspStatusT)
+  end
+
+  @[AlwaysInline]
+  def self.snd_hwdep_dsp_image_alloca : ASound::SndHwdepDspImageT
+    LibC.malloc(ASound.snd_hwdep_dsp_image_sizeof).as(ASound::SndHwdepDspImageT)
   end
 end
