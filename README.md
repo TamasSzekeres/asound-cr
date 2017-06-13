@@ -12,7 +12,7 @@ Add this to your application's `shard.yml`:
 
 ```yaml
 dependencies:
-  asound-cr:
+  asound:
     github: TamasSzekeres/asound-cr
 ```
 
