@@ -483,10 +483,10 @@ module ALSA
     fun snd_pcm_rewind(pcm : SndPcmT, frames : SndPcmUframesT*) : SndPcmSframesT
     fun snd_pcm_forwardable(pcm : SndPcmT) : SndPcmSframesT
     fun snd_pcm_forward(pcm : SndPcmT, frames : SndPcmUframesT*) : SndPcmSframesT
-    fun snd_pcm_writei(pcm : SndPcmT, buffer : Void*, size : SndPcmUframesT*) : SndPcmSframesT
-    fun snd_pcm_readi(pcm : SndPcmT, buffer : Void*, size : SndPcmUframesT*) : SndPcmSframesT
-    fun snd_pcm_writen(pcm : SndPcmT, bufs : Void**, size : SndPcmUframesT*) : SndPcmSframesT
-    fun snd_pcm_readn(pcm : SndPcmT, bufs : Void**, size : SndPcmUframesT*) : SndPcmSframesT
+    fun snd_pcm_writei(pcm : SndPcmT, buffer : Void*, size : SndPcmUframesT) : SndPcmSframesT
+    fun snd_pcm_readi(pcm : SndPcmT, buffer : Void*, size : SndPcmUframesT) : SndPcmSframesT
+    fun snd_pcm_writen(pcm : SndPcmT, bufs : Void**, size : SndPcmUframesT) : SndPcmSframesT
+    fun snd_pcm_readn(pcm : SndPcmT, bufs : Void**, size : SndPcmUframesT) : SndPcmSframesT
     fun snd_pcm_wait(pcm : SndPcmT, timeout : Int32) : Int32
 
     fun snd_pcm_link(pcm1 : SndPcmT, pcm2 : SndPcmT) : Int32
