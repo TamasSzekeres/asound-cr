@@ -1,4 +1,4 @@
-module ALSA
+module ALSA::C
   @[Link("asound")]
   lib ASound
     # Internal structure for an input object.

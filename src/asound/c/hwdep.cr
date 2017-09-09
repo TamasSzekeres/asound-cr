@@ -1,4 +1,4 @@
-module ALSA
+module ALSA::C
   @[Link("asound")]
   lib ASound
     # HwDep Hardware Dependant Interface

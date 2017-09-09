@@ -1,4 +1,4 @@
-module ALSA
+module ALSA::C
   # Digital_Audio_Interface Constants for Digital Audio Interfaces
   # AES/IEC958 channel status bits.
 
