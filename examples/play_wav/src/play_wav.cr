@@ -1,6 +1,6 @@
 require "asound"
 
-module ASoundSample
+module PlayWav
   include ALSA::C
 
   PCM_DEVICE = "default"
@@ -11,7 +11,7 @@ module ASoundSample
   def self.main
     num_args = ARGV.size
     if num_args < 4
-      puts "Usage: play-wav </path/to/file.wav> <sample_rate> <channels> <seconds>"
+      puts "Usage: play_wav </path/to/file.wav> <sample_rate> <channels> <seconds>"
       return -1
     end
 

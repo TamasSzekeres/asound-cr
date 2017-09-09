@@ -1,5 +1,5 @@
 module ALSA
-  VERSION = "0.1.0"
+  VERSION = "0.2.0"
 
   SND_LIB_MAJOR = 1 # < major number of library version
   SND_LIB_MINOR = 1 # < minor number of library version

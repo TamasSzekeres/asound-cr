@@ -1,0 +1,17 @@
+name: play_wav_hl
+version: 0.1.0
+
+authors:
+  - Tamás Szekeres <szektam2@gmail.com>
+
+targets:
+  play_wav:
+    main: src/play_wav_hl.cr
+
+dependencies:
+  asound:
+    path: ../../.
+
+crystal: 0.23.0
+
+license: MIT

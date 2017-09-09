@@ -203,7 +203,7 @@ module ALSA::C
       # Signed 32 bit CPU endian
       SND_PCM_FORMAT_S32 = SND_PCM_FORMAT_S32_LE
       # Unsigned 32 bit CPU endian
-      ND_PCM_FORMAT_U32 = SND_PCM_FORMAT_U32_LE
+      SND_PCM_FORMAT_U32 = SND_PCM_FORMAT_U32_LE
       # Float 32 bit CPU endian
       SND_PCM_FORMAT_FLOAT = SND_PCM_FORMAT_FLOAT_LE
       # Float 64 bit CPU endian
@@ -328,9 +328,9 @@ module ALSA::C
     # Signed frames quantity
     alias SndPcmSframesT = Int64
 
-    # Non blocking mode (flag for open mode) \hideinitializer
+    # Non blocking mode (flag for open mode)
     SND_PCM_NONBLOCK = 0x00000001
-    # Async notification (flag for open mode) \hideinitializer
+    # Async notification (flag for open mode)
     SND_PCM_ASYNC = 0x00000002
     # In an abort state (internal, not allowed for open)
     SND_PCM_ABORT = 0x00008000
@@ -616,7 +616,7 @@ module ALSA::C
 
     # PCM_HW_Params Hardware Parameters
     # PCM
-    # See the \ref pcm page for more details.
+    # See the pcm page for more details.
 
     fun snd_pcm_hw_params_any(pcm : SndPcmT, params : SndPcmHwParamsT) : Int32
 
