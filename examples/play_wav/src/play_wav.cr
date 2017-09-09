@@ -1,7 +1,7 @@
-require "../src/*"
+require "asound"
 
 module ASoundSample
-  include ALSA
+  include ALSA::C
 
   PCM_DEVICE = "default"
   DEFAULT_RATE = 44100_u32
@@ -35,7 +35,7 @@ module ASoundSample
     end
 
     # Allocate parameters object and fill it with default values
-    params = ALSA.snd_pcm_hw_params_alloca.as(ASound::SndPcmHwParamsT)
+    params = ALSA::C.snd_pcm_hw_params_alloca.as(ASound::SndPcmHwParamsT)
 
     ASound.snd_pcm_hw_params_any(pcm_handle, params)
 
