@@ -25,6 +25,7 @@ module PlayWavHL
       return -1
     end
 
+    # Open the PCM device in playback mode
     pcm = Pcm.new(Pcm::DEFAULT, PcmStream::Playback)
 
     # Allocate parameters object and fill it with default values
@@ -55,7 +56,6 @@ module PlayWavHL
       puts "(stereo)"
     end
 
-    # ASound.snd_pcm_hw_params_get_rate(params, pointerof(tmp), nil)
     tmp = params.rate[:val]
     puts "rate: #{tmp} bps"
 
@@ -63,19 +63,23 @@ module PlayWavHL
 
     # Allocate buffer to hold single period
     frames = params.period_size[:frames]
+    puts "frames = #{frames}"
 
     buff_size = frames * channels * 2
     buff = Bytes.new buff_size
 
     tmp = params.period_time[:val]
+    puts "period-time = #{tmp}"
 
     file = File.open file_name
 
     loops = (seconds * 1000000) / tmp
+    puts "loops = #{loops}"
     loops.times do
       res = file.read_fully? buff
       if res.nil?
         puts "Early end of file."
+        pcm.finalize
         return 0
       end
 
@@ -88,6 +92,7 @@ module PlayWavHL
       end
     end
 
+    pcm.finalize
     0
   end
 

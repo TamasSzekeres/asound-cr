@@ -72,10 +72,10 @@ module PlayWav
     end
 
     # Resume information
-    name = ASound.snd_pcm_name(pcm_handle).value
+    name = String.new ASound.snd_pcm_name(pcm_handle)
     puts "PCM name: '#{name}'"
 
-    state_name = ASound.snd_pcm_state_name(ASound.snd_pcm_state(pcm_handle)).value
+    state_name = String.new ASound.snd_pcm_state_name(ASound.snd_pcm_state(pcm_handle))
     puts "PCM state: #{state_name}"
 
     ASound.snd_pcm_hw_params_get_channels(params, out tmp)
@@ -94,15 +94,18 @@ module PlayWav
 
     # Allocate buffer to hold single period
     ASound.snd_pcm_hw_params_get_period_size(params, out frames, nil)
+    puts "frames = #{frames}"
 
     buff_size = frames * channels * 2
     buff = Bytes.new buff_size
 
     ASound.snd_pcm_hw_params_get_period_time(params, pointerof(tmp), nil)
+    puts "period-time = #{tmp}"
 
     file = File.open file_name
 
     loops = (seconds * 1000000) / tmp
+    puts "loops = #{loops}"
     loops.times do
       pcm = file.read_fully? buff
       if pcm.nil?
