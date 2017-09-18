@@ -610,7 +610,7 @@ module ALSA::C
     fun snd_pcm_info_get_subdevices_count(obj : SndPcmInfoT) : UInt32
     fun snd_pcm_info_get_subdevices_avail(obj : SndPcmInfoT) : UInt32
     fun snd_pcm_info_get_sync(obj : SndPcmInfoT) : SndPcmSyncIdT
-    fun snd_pcm_info_set_device(obj : SndPcmInfoT, val: UInt32) : Void
+    fun snd_pcm_info_set_device(obj : SndPcmInfoT, val : UInt32) : Void
     fun snd_pcm_info_set_subdevice(obj : SndPcmInfoT, val : UInt32) : Void
     fun snd_pcm_info_set_stream(obj : SndPcmInfoT, val : SndPcmStreamT) : Void
 
