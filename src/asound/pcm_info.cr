@@ -17,6 +17,12 @@ module ALSA
       ASound.snd_pcm_info_sizeof
     end
 
+    def dup : PcmInfo
+      copy = PcmInfo.new
+      ASound.snd_pcm_info_copy @info, copy.to_unsafe
+      copy
+    end
+
     # Get device from a PCM info container.
     def device : UInt32
       ASound.snd_pcm_info_get_device @info
