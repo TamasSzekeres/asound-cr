@@ -9,7 +9,7 @@ module ALSA
     end
 
     def finalize
-      ASound.snd_pcm_info_free @info
+      ASound.snd_pcm_info_free(@info)
     end
 
     # Get size of underlieing info structure.
@@ -19,18 +19,18 @@ module ALSA
 
     def dup : PcmInfo
       copy = PcmInfo.new
-      ASound.snd_pcm_info_copy @info, copy.to_unsafe
+      ASound.snd_pcm_info_copy(copy.to_unsafe, @info)
       copy
     end
 
     # Get device from a PCM info container.
     def device : UInt32
-      ASound.snd_pcm_info_get_device @info
+      ASound.snd_pcm_info_get_device(@info)
     end
 
     # Get subdevice from a PCM info container.
     def subdevice : UInt32
-      ASound.snd_pcm_info_get_subdevice @info
+      ASound.snd_pcm_info_get_subdevice(@info)
     end
 
     # Get stream (direction) from a PCM info container.
@@ -40,7 +40,7 @@ module ALSA
 
     # Get card from a PCM info container.
     def card : Int32
-      ASound.snd_pcm_info_get_card @info
+      ASound.snd_pcm_info_get_card(@info)
     end
 
     # Get id from a PCM info container.
@@ -70,17 +70,17 @@ module ALSA
 
     # Get subdevices count from a PCM info container.
     def subdevices_count : UInt32
-      ASound.snd_pcm_info_get_subdevices_count @info
+      ASound.snd_pcm_info_get_subdevices_count(@info)
     end
 
     # Get available subdevices count from a PCM info container.
     def subdevices_avail : UInt32
-      ASound.snd_pcm_info_get_subdevices_avail @info
+      ASound.snd_pcm_info_get_subdevices_avail(@info)
     end
 
     # Get hardware synchronization ID from a PCM info container.
     def sync : ASound::SndPcmSyncIdT
-      ASound.snd_pcm_info_get_sync @info
+      ASound.snd_pcm_info_get_sync(@info)
     end
 
     # Set wanted device inside a PCM info container.
