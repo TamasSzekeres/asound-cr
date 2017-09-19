@@ -32,8 +32,8 @@ module ALSA
     end
 
     # Test the presence of an access type.
-    def test(val : PcmAccess) : Int32
-      ASound.snd_pcm_access_mask_test(@mask, ASound::SndPcmAccessT.new(val.value))
+    def test(val : PcmAccess) : Bool
+      ASound.snd_pcm_access_mask_test(@mask, ASound::SndPcmAccessT.new(val.value)) == 1
     end
 
     def empty? : Bool
@@ -41,7 +41,7 @@ module ALSA
     end
 
     # Make an access type presented.
-    def set=(val : PcmAccess)
+    def set(val : PcmAccess)
       ASound.snd_pcm_access_mask_set(@mask, ASound::SndPcmAccessT.new(val.value))
       self
     end

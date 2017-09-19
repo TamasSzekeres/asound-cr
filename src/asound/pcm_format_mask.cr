@@ -32,8 +32,8 @@ module ALSA
     end
 
     # Test the presence of a format.
-    def test(val : PcmFormat) : Int32
-      ASound.snd_pcm_format_mask_test(@mask, ASound::SndPcmFormatT.new(val.value))
+    def test(val : PcmFormat) : Bool
+      ASound.snd_pcm_format_mask_test(@mask, ASound::SndPcmFormatT.new(val.value)) == 1
     end
 
     def empty? : Bool
@@ -41,7 +41,7 @@ module ALSA
     end
 
     # Make a format presented.
-    def set=(val : PcmFormat)
+    def set(val : PcmFormat)
       ASound.snd_pcm_format_mask_set(@mask, ASound::SndPcmFormatT.new(val.value))
       self
     end
