@@ -46,9 +46,9 @@ module ALSA
     def accuracy_report=(accuracy_report : UInt16)
       bit = accuracy_report & 1_u16
       if bit == 1_u16
-        @bits |= (1_u16 << 5_u16)
+        @report.bits |= (1_u16 << 5_u16)
       else
-        @bits &= ~(1_u16 << 5_u16)
+        @report.bits &= ~(1_u16 << 5_u16)
       end
     end
 
