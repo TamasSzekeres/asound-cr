@@ -319,8 +319,8 @@ module ALSA::C
 
       # accuracy represented in ns units
       # unsigned int accuracy_report:1; /* 0 if accuracy unknown, 1 if accuracy field is valid */
-      # unsigned int accuracy; /* up to 4.29s, will be packed in separate field  */
       bits : UInt16
+      accuracy : UInt16; # up to 4.29s, will be packed in separate field
     end
 
     # Unsigned frames quantity
